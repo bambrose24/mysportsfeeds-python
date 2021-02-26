@@ -8,5 +8,10 @@ setup(
     author_email='brad.barkhouse@mysportsfeeds.com',
     url='https://github.com/MySportsFeeds/mysportsfeeds-python',
     license='MIT',
-    description='A Python wrapper for the MySportsFeeds Sports Data API'
+    description='A Python wrapper for the MySportsFeeds Sports Data API',
+    install_requires=[
+        'requests>=2,<3',
+        'simplejson>=3,<4',
+        'python-dateutil>=2,<3',
+    ]
 )
