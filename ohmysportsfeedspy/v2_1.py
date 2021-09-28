@@ -29,6 +29,9 @@ class API_v2_1(API_v1_0):
             'seasonal_player_gamelogs',
             'daily_player_gamelogs',
             'weekly_player_gamelogs',
+            'seasonal_player_stats_projections',
+            'daily_player_gamelogs_projections',
+            'weekly_player_gamelogs_projections',
             'seasonal_team_gamelogs',
             'daily_team_gamelogs',
             'weekly_team_gamelogs',
@@ -115,6 +118,28 @@ class API_v2_1(API_v1_0):
                 raise AssertionError("You must specify a 'week' param for this request.")
 
             return "{base_url}/{league}/{season}/week/{week}/player_gamelogs.{output}".format(base_url=self.base_url, league=league, season=season, week=params["week"], output=output_format)
+
+        elif feed == "seasonal_player_stats_projections":
+            if season == "":
+                raise AssertionError("You must specify a season for this request.")
+
+            return "{base_url}/{league}/{season}/player_stats_totals_projections.{output}".format(base_url=self.base_url, league=league, season=season, output=output_format)
+
+        elif feed == "daily_player_gamelogs_projections":
+            if season == "":
+                raise AssertionError("You must specify a season for this request.")
+            if not "date" in params:
+                raise AssertionError("You must specify a 'date' param for this request.")
+
+            return "{base_url}/{league}/{season}/date/{date}/player_gamelogs_projections.{output}".format(base_url=self.base_url, league=league, season=season, date=params["date"], output=output_format)
+
+        elif feed == "weekly_player_gamelogs_projections":
+            if season == "":
+                raise AssertionError("You must specify a season for this request.")
+            if not "week" in params:
+                raise AssertionError("You must specify a 'week' param for this request.")
+
+            return "{base_url}/{league}/{season}/week/{week}/player_gamelogs_projections.{output}".format(base_url=self.base_url, league=league, season=season, week=params["week"], output=output_format)
 
         elif feed == "seasonal_team_gamelogs":
             if season == "":
