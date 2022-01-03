@@ -48,6 +48,7 @@ class API_v2_1(API_v1_0):
             'seasonal_standings',
             'seasonal_game_lines',
             'daily_game_lines',
+            'weekly_game_lines',
             'daily_futures'
         ]
 
@@ -239,6 +240,14 @@ class API_v2_1(API_v1_0):
                 raise AssertionError("You must specify a 'date' param for this request.")
             return "{base_url}/{league}/{season}/date/{date}/odds_gamelines.{output}".format(base_url=self.base_url, league=league,
                                                                                              season=season, date=params["date"], output=output_format)
+
+        elif feed == "weekly_game_lines":
+            if season == "":
+                raise AssertionError("You must specify a season for this request")
+            if not "week" in params:
+                raise AssertionError("You must specify a 'week' param for this request.")
+            week = params['week']
+            return f"{self.base_url}/{league}/{season}/week/{week}/odds_gamelines.{output_format}"
 
         elif feed == "daily_futures":
             if season == "":
