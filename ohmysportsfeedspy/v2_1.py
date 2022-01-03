@@ -246,6 +246,8 @@ class API_v2_1(API_v1_0):
                 raise AssertionError("You must specify a season for this request")
             if not "week" in params:
                 raise AssertionError("You must specify a 'week' param for this request.")
+            if league != "nfl":
+                raise AssertionError("weekly_game_lines feed type only avaiable for the NFL")
             week = params['week']
             return f"{self.base_url}/{league}/{season}/week/{week}/odds_gamelines.{output_format}"
 
